@@ -3,16 +3,33 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title></ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  <ion-list>
+      <ion-item>
+          <ion-label>Make</ion-label>
+          <ion-select [(ngModel)]="make" (ionChange)="checkbrand(year)">
+            <ion-option *ngFor = "let make of allMakes" [value]="make" >{{make}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>Year</ion-label>
+              <ion-datetime #year class="date" displayFormat="YYYY" [(ngModel)]="myDate" (ionChange)="checkbrand(year)"></ion-datetime>
+          </ion-item>
+        <ion-item>
+            <ion-label>Model</ion-label>
+            <ion-select [(ngModel)]="model">
+              <ion-option #model *ngFor = "let mod of allModels" [value]="mod">{{mod}}</ion-option>
+            </ion-select>
+          </ion-item>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+        <ion-item>
+          <ion-label>miles/week</ion-label>
+            <ion-input #miles type="tel" maxlength="7"></ion-input>
+        </ion-item>
+  </ion-list>
+  <button ion-button round color="secondary" (click)="getSaving(year, miles)">Calculate Savings</button>
 </ion-content>
